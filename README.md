@@ -4,31 +4,45 @@ PyByteWatt is a Python package that provides an interface to interact with the B
 
 ## Installation
 
-You can install PyByteWatt using pip:
+You can install ByteWatt API Client using pip:
 
 ```
-pip install pybytewatt
+pip install bytewatt-api-client
 ```
 
 ## Usage
 
-Here's a basic example of how to use PyByteWatt:
+Here's a basic example of how to use ByteWatt API Client:
 
 ```python
 import asyncio
-import aiohttp
-from pybytewatt import ByteWattAPI
+from bytewatt_api_client import ByteWattAPIClient
 
 async def main():
-    async with aiohttp.ClientSession() as session:
-        api = ByteWattAPI("your_username", "your_password", "auth_signature", "auth_timestamp", session)
+    # Create an instance with a custom timeout of 15 seconds
+    async with ByteWattAPIClient("your_username", "your_password", "auth_signature", "auth_timestamp", timeout=15.0) as client:
         try:
-            battery_data = await api.get_battery_data()
+            battery_data = await client.get_battery_data()
             print(battery_data)
         except Exception as e:
             print(f"An error occurred: {e}")
 
 asyncio.run(main())
+```
+
+The `ByteWattAPIClient` class accepts an optional `timeout` parameter (in seconds) for API requests. The default timeout is 10 seconds if not specified.
+
+You can use it with an async context manager (`async with`) to ensure proper cleanup of resources.
+
+If you prefer manual management, you can also use it like this:
+
+```python
+client = ByteWattAPIClient("your_username", "your_password", "auth_signature", "auth_timestamp", timeout=20.0)
+try:
+    battery_data = await client.get_battery_data()
+    print(battery_data)
+finally:
+    await client.close()
 ```
 
 ## License
