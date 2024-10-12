@@ -16,7 +16,7 @@ Here's a basic example of how to use ByteWatt API Client:
 
 ```python
 import asyncio
-from bytewatt_api_client import ByteWattAPIClient
+from pybytewatt import ByteWattAPIClient
 
 async def main():
     # Create an instance with a custom timeout of 15 seconds
