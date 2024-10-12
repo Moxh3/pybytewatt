@@ -7,7 +7,7 @@ PyByteWatt is a Python package that provides an interface to interact with the B
 You can install ByteWatt API Client using pip:
 
 ```
-pip install bytewatt-api-client
+pip install pybytewatt
 ```
 
 ## Usage
