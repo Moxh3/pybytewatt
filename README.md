@@ -1,6 +1,6 @@
 # PyByteWatt
 
-PyByteWatt is a Python package that provides an interface to interact with the Byte Watt API. It allows you to authenticate and retrieve battery data from Byte Watt systems.
+PyByteWatt is a Python package that provides an interface to interact with the Neovolt / Byte Watt Home Battery API. It allows you to authenticate and retrieve battery data from Byte Watt systems.
 
 ## Installation
 
