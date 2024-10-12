@@ -20,7 +20,7 @@ from pybytewatt import ByteWattAPIClient
 
 async def main():
     # Create an instance with a custom timeout of 15 seconds
-    async with ByteWattAPIClient("your_username", "your_password", "auth_signature", "auth_timestamp", timeout=15.0) as client:
+    async with ByteWattAPIClient("your_username", "your_password", timeout=15.0) as client:
         try:
             battery_data = await client.get_battery_data()
             print(battery_data)
@@ -37,7 +37,7 @@ You can use it with an async context manager (`async with`) to ensure proper cle
 If you prefer manual management, you can also use it like this:
 
 ```python
-client = ByteWattAPIClient("your_username", "your_password", "auth_signature", "auth_timestamp", timeout=20.0)
+client = ByteWattAPIClient("your_username", "your_password", timeout=20.0)
 try:
     battery_data = await client.get_battery_data()
     print(battery_data)
