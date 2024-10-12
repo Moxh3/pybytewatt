@@ -5,20 +5,18 @@ import aiohttp
 class ByteWattAPI:
     """Main class to interact with the Byte Watt API."""
 
-    def __init__(self, username: str, password: str, auth_signature: str, auth_timestamp: str, timeout: Optional[float] = 5.0):
+    def __init__(self, username: str, password: str, timeout: Optional[float] = 5.0):
         """Initialize the API client.
 
         Args:
             username (str): The username for authentication.
             password (str): The password for authentication.
-            auth_signature (str): The authentication signature.
-            auth_timestamp (str): The authentication timestamp.
             timeout (float, optional): The timeout for API requests in seconds. Defaults to 5.0.
         """
         self.username = username
         self.password = password
-        self.auth_signature = auth_signature
-        self.auth_timestamp = auth_timestamp
+        self.auth_timestamp = self.generate_auth_timestamp()
+        self.auth_signature = self.generate_auth_signature(self.auth_timestamp)
         self.access_token = None
         self.session = None
         self.timeout = aiohttp.ClientTimeout(total=timeout)
@@ -97,6 +95,31 @@ class ByteWattAPI:
             return data['data']  # Return the first system's data
         else:
             raise ByteWattAPIError("Unexpected data format from Byte Watt API")
+
+
+    def generate_auth_timestamp() -> int:
+    """Calculate the timestamp."""
+    return int(time.time())
+
+
+    def generate_auth_signature(timestamp) -> str:
+        """Calculate the authentication signature."""
+        # Constants from the original code
+        r = "LS885ZYDA95JV"
+        a = "FQKUIUUUV7PQNODZ"
+        A = "RDZIS4ERRED"
+        i = "S0EED8BCWSS"
+
+        # Construct the string to hash
+        auth_string = r + a + A + i + str(timestamp)
+
+        # Calculate SHA512 hash
+        hash_object = hashlib.sha512(auth_string.encode())
+        hash_hex = hash_object.hexdigest()
+
+        # Construct the final authsignature
+        return "al8e4s" + hash_hex + "ui893ed"
+
 
     async def close(self):
         """Close the aiohttp ClientSession."""
