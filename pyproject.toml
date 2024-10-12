@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "pybytewatt"
 version = "0.1.0"
 authors = [
-  { name="Eaglan Kurek", email="eaglan@kurek.au" },
+  { name="M0xh3", email="m0xh3@outlook.com" },
 ]
 description = "A Python package to interact with the Byte Watt API"
 readme = "README.md"
