@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pybytewatt"
+version = "0.1.0"
+authors = [
+  { name="Eaglan Kurek", email="eaglan@kurek.au" },
+]
+description = "A Python package to interact with the Byte Watt API"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "aiohttp>=3.7.4",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/M0xh3/pybytewatt"
+"Bug Tracker" = "https://github.com/M0xh3/pybytewatt/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pybytewatt"]
